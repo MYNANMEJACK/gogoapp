@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "py",
+			"path": ".."
+		},
+		{
+			"name": "fLporject",
+			"path": "../../fLporject"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}

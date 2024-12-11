@@ -1,0 +1,35 @@
+name: gogoapp
+description: "A new Flutter project."
+
+publish_to: 'none'  # Prevents publishing by mistake
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  http: ^0.13.3
+  shared_preferences: ^2.3.3
+  provider: ^6.1.2 
+  carousel_slider: ^5.0.0
+  qr_flutter: ^4.1.0
+   # 确保这里使用了最新或适合的版本
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/dogcart.png
+    - assets/images/GOGO.png
+    - assets/images/logo1.png
+    - assets/images/logo2.png
+    - assets/images/logo3.png
+    - assets/images/logo4.png
+    - assets/images/vi.png
