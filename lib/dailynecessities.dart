@@ -7,7 +7,7 @@ class DailyNecessitiesPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('生活用品'),
       ),
-      backgroundColor: Colors.white, // 设置背景色为白色
+      backgroundColor: Colors.white, 
       body: Center(
         child: Text(
           '生活用品',

@@ -291,7 +291,7 @@ app.get('/pickup-locations', (_req, res) => {
   
         const orderId = result.insertId;
   
-        // 插入訂單明細
+        
         const orderItemsQuery = `
           INSERT INTO order_items (order_id, product_name, quantity, price)
           VALUES ?
@@ -304,7 +304,7 @@ app.get('/pickup-locations', (_req, res) => {
             return res.status(500).json({ message: '插入訂單明細失敗' });
           }
   
-          // 扣減庫存
+          
           const updateStockPromises = items.map((item) => {
             const updateStockQuery = `
               UPDATE products
