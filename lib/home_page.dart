@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gogoapp/life.dart';
+import 'package:gogoapp/liquid.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'drinks.dart';
-import 'dailynecessities.dart';
 import 'fruitsandvegetables.dart';
-import 'ProductsPage.dart';
 import 'image_carousel.dart';
 import 'recommended_products.dart'; 
 import 'discount.dart'; 
@@ -56,16 +55,16 @@ class _HomePageState extends State<HomePage> {
     Widget page;
     switch (productName) {
       case '飲品':
-        page = DishSelectorPage();
+        page = liquidPage();
         break;
       case '糧油':
-        page = ProductsPage();
+        page =  FruitsAndVegetablesPage();
         break;
       case '果蔬':
         page = FruitsAndVegetablesPage();
         break;
       case '生活用品':
-        page = DailyNecessitiesPage();
+        page = lifePage();
         break;
       default:
         return;

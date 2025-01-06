@@ -6,12 +6,12 @@ import 'package:provider/provider.dart';
 import 'cart_page.dart';
 import 'product_details_page.dart';
 
-class ProductsPage extends StatefulWidget {
+class liquidPage extends StatefulWidget {
   @override
   _ProductsPageState createState() => _ProductsPageState();
 }
 
-class _ProductsPageState extends State<ProductsPage> {
+class _ProductsPageState extends State<liquidPage> {
   List<dynamic> products = [];
   String errorMessage = '';
 
@@ -23,7 +23,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   Future<void> fetchProducts() async {
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000/products'));
+      final response = await http.get(Uri.parse('http://10.0.2.2:3000/products/type/drink'));
       if (response.statusCode == 200) {
         setState(() {
           products = json.decode(response.body);
@@ -67,7 +67,7 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  
+
       body: errorMessage.isNotEmpty
           ? Center(child: Text(errorMessage))
           : Padding(

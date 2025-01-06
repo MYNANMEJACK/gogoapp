@@ -178,6 +178,54 @@ app.get('/products/search', (req, res) => {
       res.json({ status: 'success', products: results });
   });
 });
+//--------------------------------------------------------------------商品引入type vegetable----------------------------------------
+app.get('/products/type/vegetable', (req, res) => {
+  const sql = 'SELECT * FROM products WHERE type = "vegetable"';
+  db.query(sql, (err, results) => {
+      if (err) {
+          console.error('Database query failed:', err);
+          return res.status(500).send({ status: 'error', message: 'Database query failed: ' + err.message });
+      }
+      console.log('Products with tag "off" fetched successfully:', results);
+      res.json(results);
+  });
+});
+//--------------------------------------------------------------------商品引入type drink----------------------------------------
+app.get('/products/type/drink', (req, res) => {
+  const sql = 'SELECT * FROM products WHERE type = "drink"';
+  db.query(sql, (err, results) => {
+      if (err) {
+          console.error('Database query failed:', err);
+          return res.status(500).send({ status: 'error', message: 'Database query failed: ' + err.message });
+      }
+      console.log('Products with tag "off" fetched successfully:', results);
+      res.json(results);
+  });
+});
+//--------------------------------------------------------------------商品引入type food----------------------------------------
+app.get('/products/type/food', (req, res) => {
+  const sql = 'SELECT * FROM products WHERE type = "food"';
+  db.query(sql, (err, results) => {
+      if (err) {
+          console.error('Database query failed:', err);
+          return res.status(500).send({ status: 'error', message: 'Database query failed: ' + err.message });
+      }
+      console.log('Products with tag "off" fetched successfully:', results);
+      res.json(results);
+  });
+});
+//--------------------------------------------------------------------商品引入type life----------------------------------------
+app.get('/products/type/life', (req, res) => {
+  const sql = 'SELECT * FROM products WHERE type = "life"';
+  db.query(sql, (err, results) => {
+      if (err) {
+          console.error('Database query failed:', err);
+          return res.status(500).send({ status: 'error', message: 'Database query failed: ' + err.message });
+      }
+      console.log('Products with tag "off" fetched successfully:', results);
+      res.json(results);
+  });
+});
 // ----------------------------------------------------------------------------商品off引入-----------------------------------------------------------
 
 app.get('/products/off', (req, res) => {
@@ -191,6 +239,7 @@ app.get('/products/off', (req, res) => {
         res.json(results);
     });
 });
+
 // ----------------------------------------------------------------------------商品tag2引入-----------------------------------------------------------
 
 app.get('/products/tag', (req, res) => {

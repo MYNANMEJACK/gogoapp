@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gogoapp/ProductsPage.dart';
 import 'package:gogoapp/cart_provider.dart';
 import 'package:provider/provider.dart';
 import 'home_page.dart';
@@ -47,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 7,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: Text('gogoshop'),
@@ -73,18 +74,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
           bottom: TabBar(
-            isScrollable: true,
+           
             indicatorColor: const Color.fromARGB(255, 254, 0, 0),
             unselectedLabelColor: const Color.fromARGB(255, 0, 0, 0),
             labelColor: const Color.fromARGB(255, 255, 187, 0),
             tabs: [
               Tab(text: '主頁'),
-              Tab(text: '飲料'),
-              Tab(text: '食物'),
-              Tab(text: '酒類'),
-              Tab(text: '水果'),
-              Tab(text: '生活用品'),
-              Tab(text: '急凍食品'),
+              Tab(text: '隨機菜式'),
+              Tab(text: '所有產品'),
+        
             ],
           ),
         ),
@@ -93,12 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             HomePage(),
             DishSelectorPage(),
-            DailyNecessitiesPage(),
+            ProductsPage(),
             FruitsAndVegetablesPage(),
-            Center(child: Text('酒类')),
-            Center(child: Text('水果')),
-            Center(child: Text('生活用品')),
-            Center(child: Text('急冻')),
           ],
         ),
       ),
