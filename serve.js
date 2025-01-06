@@ -159,6 +159,25 @@ app.get('/products', (req, res) => {
         res.json(results);
     });
 });
+app.get('/products/search', (req, res) => {
+  const searchQuery = req.query.search;
+
+  if (!searchQuery) {
+      return res.status(400).send({ status: 'error', message: 'Search query is required' });
+  }
+
+  const sql = 'SELECT id, image_url, name, price FROM products WHERE name LIKE ? OR tags LIKE ?';
+  const searchTerm = `%${searchQuery}%`;
+
+  db.query(sql, [searchTerm, searchTerm], (err, results) => {
+      if (err) {
+          console.error('Database query failed:', err);
+          return res.status(500).send({ status: 'error', message: 'Database error' });
+      }
+
+      res.json({ status: 'success', products: results });
+  });
+});
 // ----------------------------------------------------------------------------商品off引入-----------------------------------------------------------
 
 app.get('/products/off', (req, res) => {

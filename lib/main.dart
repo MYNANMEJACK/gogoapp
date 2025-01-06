@@ -8,8 +8,8 @@ import 'dailynecessities.dart';
 import 'splash_screen.dart';
 import 'user_provider.dart';
 import 'app_drawer.dart';
-import 'cart_page.dart'; 
-
+import 'cart_page.dart';
+import 'search_page.dart';  // 引入SearchPage
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: userProvider),
-        ChangeNotifierProvider(create: (_) => CartProvider()), 
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MyApp(),
     ),
@@ -56,7 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-                print("search");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchPage()), // 跳转到搜索页面
+                );
               },
             ),
             IconButton(
@@ -64,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CartPage()), 
+                  MaterialPageRoute(builder: (context) => CartPage()),
                 );
               },
             ),
@@ -85,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        drawer: AppDrawer(),  // 使用新的AppDrawer组件
+        drawer: AppDrawer(), // 使用新的AppDrawer组件
         body: TabBarView(
           children: [
             HomePage(),
