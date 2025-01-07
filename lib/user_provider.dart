@@ -11,6 +11,8 @@ class UserProvider extends ChangeNotifier {
   // Getter：獲取登錄狀態
   bool get isLoggedIn => _isLoggedIn;
 
+  get userId => null;
+
   // 初始化用戶數據（應在應用啟動時調用）
   Future<void> initializeUser() async {
     try {

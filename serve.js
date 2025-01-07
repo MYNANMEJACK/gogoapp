@@ -26,6 +26,39 @@ db.connect(err => {
     }
     console.log('Database connected!');
 });
+
+// ----------------------------------------------------------------------------用戶管理 API-----------------------------------------------------------
+// 1. 获取所有用户
+app.get('/users', (req, res) => {
+  const sql = 'SELECT id, name, email, phone, job, gender FROM users';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Database query failed:', err);
+      return res.status(500).json({ status: 'error', message: 'Failed to fetch users' });
+    }
+    res.json({ status: 'success', users: results });
+  });
+});
+
+app.get('/users/:name', (req, res) => {
+  const { name } = req.params;
+  console.log(`Received request for user name: ${name}`); // 打印请求的用户名
+
+  const sql = 'SELECT id, name, email, phone, job, gender FROM users WHERE name = ?';
+  db.query(sql, [name], (err, result) => {
+    if (err) {
+      console.error('Database query failed:', err);
+      return res.status(500).json({ status: 'error', message: 'Failed to fetch user' });
+    }
+    console.log(`Query result: ${JSON.stringify(result)}`); // 打印查询结果
+
+    if (result.length === 0) {
+      return res.status(404).json({ status: 'error', message: 'User not found' });
+    }
+    res.json({ status: 'success', user: result[0] });
+  });
+});
+
 // ----------------------------------------------------------------------------登錄-----------------------------------------------------------
 app.post('/login', (req, res) => {
     const { username, password } = req.body;

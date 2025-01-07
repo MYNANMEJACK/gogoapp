@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'home_page.dart';
 import 'drinks.dart';
 import 'fruitsandvegetables.dart';
-import 'dailynecessities.dart';
 import 'splash_screen.dart';
 import 'user_provider.dart';
 import 'app_drawer.dart';
