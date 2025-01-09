@@ -87,9 +87,21 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('注冊'),
+    appBar: AppBar(
+      title: const Text(
+        '注冊',
+        style: TextStyle(
+          color: Color.fromARGB(255, 255, 255, 255), // 設置文字顏色為黑色（可以根據需要調整）
+          fontWeight: FontWeight.bold, // 設置文字為粗體
+        ),
       ),
+      centerTitle: true, // 讓文字置中
+      backgroundColor: const Color.fromARGB(255, 255, 80, 80), 
+      elevation: 0, // 移除 AppBar 陰影
+      iconTheme: IconThemeData(
+        color: Colors.black, // 將 AppBar 的圖標設置為黑色（如返回按鈕）
+      ),
+    ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Form(
@@ -230,7 +242,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: _register,
                       child: Text('注冊'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: const Color.fromARGB(255, 255, 80, 80),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),

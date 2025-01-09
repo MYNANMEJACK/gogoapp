@@ -169,27 +169,32 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 30),
             // 登錄按鈕
             ElevatedButton(
-              onPressed: _isLoading ? null : _login, // 加載中禁用按鈕
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                  const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.orange),
-              ),
-              child: _isLoading
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text(
-                      '登錄',
-                      style: TextStyle(fontSize: 18),
-                    ),
-            ),
-            const SizedBox(height: 20),
+  onPressed: _isLoading ? null : _login, // 加載中禁用按鈕
+  style: ButtonStyle(
+    padding: MaterialStateProperty.all<EdgeInsets>(
+      const EdgeInsets.symmetric(horizontal:180,vertical: 15), // 調整按鈕的內邊距，使其更長
+    ),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0), // 保持圓角樣式
+      ),
+    ),
+    backgroundColor: MaterialStateProperty.all<Color>(
+      const Color.fromARGB(255, 255, 80, 80), // 設置背景顏色
+    ),
+  ),
+  child: _isLoading
+      ? const CircularProgressIndicator(color: Colors.white) // 加載中顯示白色進度條
+      : const Text(
+          '登入', // 修改按鈕文字為 Login
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold, // 設置文字為粗體
+            color: Colors.white, // 設置文字顏色為白色
+          ),
+        ),
+),
+const SizedBox(height: 20),
             // 跳轉到註冊頁面的按鈕
             TextButton(
               onPressed: () {
@@ -211,13 +216,23 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('登錄'),
-        backgroundColor: Colors.white,
-        elevation: 0,
+  return Scaffold(
+    backgroundColor: Colors.white,
+    appBar: AppBar(
+      title: const Text(
+        'Login', 
+        style: TextStyle(
+          color: Color.fromARGB(255, 255, 255, 255), 
+          fontWeight: FontWeight.bold, 
+        ),
       ),
+      centerTitle: true, // 讓文字置中
+      backgroundColor: const Color.fromARGB(255, 255, 80, 80), 
+      elevation: 0, 
+      iconTheme: IconThemeData(
+        color: Colors.black, 
+      ),
+    ),
       body: Stack(
         children: [
           _buildLoginForm(),

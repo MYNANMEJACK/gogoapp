@@ -11,8 +11,20 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('購物車'),
+      title: const Text(
+        '購物車', 
+        style: TextStyle(
+          color: Color.fromARGB(255, 255, 255, 255), 
+          fontWeight: FontWeight.bold, 
+        ),
       ),
+      centerTitle: true, // 讓文字置中
+      backgroundColor: const Color.fromARGB(255, 255, 80, 80), 
+      elevation: 0, 
+      iconTheme: IconThemeData(
+        color: Colors.black, 
+      ),
+    ),
       body: cart.items.isEmpty
           ? Center(
               child: Text(
@@ -132,9 +144,16 @@ class CartPage extends StatelessWidget {
                             );
                           }
                         },
-                        child: Text('結算'),
+                        child: const Text(
+                     '結算', // 按鈕文字
+                         style: TextStyle(
+                           color: Colors.white, // 設置文字為白色
+                                fontWeight: FontWeight.bold, // 可選：設置文字為粗體
+                             fontSize: 16, // 可選：設置文字大小
+                                      ),
+                                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 255, 157, 0),
+                          backgroundColor: const Color.fromARGB(255, 255, 80, 80),
                           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         ),
                       ),

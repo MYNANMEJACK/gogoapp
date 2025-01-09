@@ -237,7 +237,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     if (_userId == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('結算'),
+          title: const Text(''),
         ),
         body: const Center(
           child: CircularProgressIndicator(),
@@ -246,10 +246,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('結算'),
-      ),
-      body: Padding(
+   appBar: AppBar(
+  title: const Text(
+    '結算中心',
+    style: TextStyle(
+      color: Colors.white, // 設置文字顏色為白色
+      fontWeight: FontWeight.bold, // 設置文字為粗體
+      fontSize: 20, // 可選：設置文字大小
+    ),
+  ),
+  centerTitle: true, // 讓文字居中
+  backgroundColor: const Color.fromARGB(255, 255, 80, 80), // 背景設置為紅色
+  elevation: 0, // 可選：移除陰影，讓背景顏色純淨
+),
+      body: 
+      
+      Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -411,12 +423,32 @@ class _CheckoutPageState extends State<CheckoutPage> {
               _getPaymentQRCode(_selectedPaymentMethod),
             const SizedBox(height: 16),
        
-            ElevatedButton(
-              onPressed: _isSubmitting ? null : submitOrder,
-              child: _isSubmitting
-                  ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text('提交訂單'),
+        Center(
+  child: SizedBox(
+    width: 500, // 固定按鈕寬度
+    child: ElevatedButton(
+      onPressed: _isSubmitting ? null : submitOrder,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color.fromARGB(255, 255, 80, 80), // 按鈕背景顏色
+        padding: const EdgeInsets.symmetric(vertical: 10), // 控制按鈕高度
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0), // 圓角設計
+        ),
+      ),
+      child: _isSubmitting
+          ? const CircularProgressIndicator(color: Colors.white) // 加載中顯示白色進度條
+          : const Text(
+              '提交訂單',
+              style: TextStyle(
+                color: Colors.white, // 白色文字
+                fontWeight: FontWeight.bold, // 粗體字
+                fontSize: 16, // 字體大小
+              ),
             ),
+    ),
+  ),
+)
+
           ],
         ),
       ),

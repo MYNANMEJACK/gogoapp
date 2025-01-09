@@ -9,7 +9,7 @@ import 'splash_screen.dart';
 import 'user_provider.dart';
 import 'app_drawer.dart';
 import 'cart_page.dart';
-import 'search_page.dart';  // 引入SearchPage
+import 'search_page.dart';  
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,27 +47,36 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('gogoshop'),
-          backgroundColor: Colors.white,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SearchPage()), // 跳转到搜索页面
-                );
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CartPage()),
+    length: 3,
+    child: Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'gogoshop', 
+          style: TextStyle(
+            color: Colors.white, 
+            fontWeight: FontWeight.bold, 
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 255, 80, 80), 
+        iconTheme: const IconThemeData(
+  color: Colors.white, // Drawer 圖標顏色設置為白色
+),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.white), 
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SearchPage()), 
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.shopping_cart, color: Colors.white), 
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
                 );
               },
             ),
@@ -75,8 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
           bottom: TabBar(
            
             indicatorColor: const Color.fromARGB(255, 254, 0, 0),
-            unselectedLabelColor: const Color.fromARGB(255, 0, 0, 0),
-            labelColor: const Color.fromARGB(255, 255, 187, 0),
+            unselectedLabelColor: const Color.fromARGB(255, 255, 255, 255),
+            labelColor: const Color.fromARGB(255, 255, 255, 255),
             tabs: [
               Tab(text: '主頁'),
               Tab(text: '隨機菜式'),
@@ -85,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        drawer: AppDrawer(), // 使用新的AppDrawer组件
+        drawer: AppDrawer(), 
         body: TabBarView(
           children: [
             HomePage(),
