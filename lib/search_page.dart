@@ -66,7 +66,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
           onChanged: (query) => _searchProducts(query),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromARGB(255, 255, 80, 80),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())

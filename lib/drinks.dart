@@ -76,7 +76,7 @@ class _DishSelectorPageState extends State<DishSelectorPage> {
       );
     }
   }
-//將顯示的所有菜品添加到購物車。使用Provider獲取購物車實例並調用addItem方法
+
   void buyAllItems() {
     final cart = Provider.of<CartProvider>(context, listen: false);
     for (var dish in vegetableDishes) {

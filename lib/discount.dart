@@ -5,8 +5,6 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'product_details_page.dart';
 
-
-
 class discount extends StatefulWidget {
   @override
   _RecommendedProductsState createState() => _RecommendedProductsState();
@@ -101,34 +99,38 @@ class _RecommendedProductsState extends State<discount> {
                               ),
                               SizedBox(height: 5),
                               product['stock'] > 0
-                                ? ElevatedButton(
-                                    onPressed: () {
-                                      final cart = Provider.of<CartProvider>(context, listen: false);
-                                      cart.addItem({
-                                        'name': product['name'],
-                                        'image_url': product['image_url'],
-                                        'price': product['price'],
-                                        'quantity': 1,
-                                      });
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text('${product['name']} 已添加到購物車')),
-                                      );
-                                    },
-                                    child: Text('Add to Cart'),
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(double.infinity, 36),
-                                      textStyle: TextStyle(fontSize: 12),
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        final cart = Provider.of<CartProvider>(context, listen: false);
+                                        cart.addItem({
+                                          'name': product['name'],
+                                          'image_url': product['image_url'],
+                                          'price': product['price'],
+                                          'quantity': 1,
+                                        });
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text('${product['name']} 已添加到購物車')),
+                                        );
+                                      },
+                                      child: Text(
+                                        '加入購物車',
+                                        style: TextStyle(color: Colors.black), // 设置字体颜色为黑色
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(double.infinity, 36),
+                                        backgroundColor: const Color.fromARGB(255, 255, 191, 191), // 设置背景颜色
+                                        textStyle: TextStyle(fontSize: 12),
+                                      ),
+                                    )
+                                  : ElevatedButton(
+                                      onPressed: null,
+                                      child: Text('賣曬啦'),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(double.infinity, 36),
+                                        textStyle: TextStyle(fontSize: 12),
+                                        backgroundColor: Colors.grey,
+                                      ),
                                     ),
-                                  )
-                                : ElevatedButton(
-                                    onPressed: null,
-                                    child: Text('賣曬啦'),
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(double.infinity, 36),
-                                      textStyle: TextStyle(fontSize: 12),
-                                      backgroundColor: Colors.grey,
-                                    ),
-                                  ),
                             ],
                           ),
                         ),

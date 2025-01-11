@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gogoapp/dailynecessities.dart';
 import 'package:gogoapp/life.dart';
 import 'package:gogoapp/liquid.dart';
 import 'package:http/http.dart' as http;
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         page = liquidPage();
         break;
       case '糧油':
-        page =  FruitsAndVegetablesPage();
+        page =  DailyNecessitiesPage();
         break;
       case '果蔬':
         page = FruitsAndVegetablesPage();

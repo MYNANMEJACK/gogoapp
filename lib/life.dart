@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'cart_page.dart';
 import 'product_details_page.dart';
 
+// 生活用品產品頁面----------------------------------------------------------------------------
 class lifePage extends StatefulWidget {
   @override
   _ProductsPageState createState() => _ProductsPageState();
@@ -67,7 +68,17 @@ class _ProductsPageState extends State<lifePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 255, 80, 80), // 背景颜色
+        centerTitle: true, // 标题居中
+        title: Text(
+          '生活用品', // AppBar标题
+          style: TextStyle(
+            color: Colors.white, // 白色字体
+            fontWeight: FontWeight.bold, // 加粗字体
+          ),
+        ),
+      ),
       body: errorMessage.isNotEmpty
           ? Center(child: Text(errorMessage))
           : Padding(
@@ -82,6 +93,8 @@ class _ProductsPageState extends State<lifePage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
+                  final bool inStock = product['stock'] > 0; // 检测库存
+
                   return Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -122,17 +135,30 @@ class _ProductsPageState extends State<lifePage> {
                                 textAlign: TextAlign.center,
                               ),
                               SizedBox(height: 4),
-                              ElevatedButton(
-                                onPressed: () => addToCart(product),
-                                child: Text('ADD TO car'),
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(double.infinity, 36),
-                                  backgroundColor: const Color.fromARGB(255, 255, 153, 0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
+                              inStock
+                                  ? ElevatedButton(
+                                      onPressed: () => addToCart(product),
+                                      child: Text(
+                                        '加入購物車',
+                                        style: TextStyle(color: Colors.black), // 设置文字颜色为黑色
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(double.infinity, 36),
+                                        backgroundColor: const Color.fromARGB(255, 255, 191, 191),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    )
+                                  : ElevatedButton(
+                                      onPressed: null,
+                                      child: Text('賣曬啦'),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(double.infinity, 36),
+                                        textStyle: TextStyle(fontSize: 12),
+                                        backgroundColor: Colors.grey, // 灰色背景表示无库存
+                                      ),
+                                    ),
                             ],
                           ),
                         ),
@@ -145,4 +171,3 @@ class _ProductsPageState extends State<lifePage> {
     );
   }
 }
-

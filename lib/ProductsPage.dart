@@ -67,7 +67,7 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  
+
       body: errorMessage.isNotEmpty
           ? Center(child: Text(errorMessage))
           : Padding(
@@ -82,6 +82,8 @@ class _ProductsPageState extends State<ProductsPage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
+                  final bool inStock = product['stock'] > 0; // 检测库存
+
                   return Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -122,17 +124,30 @@ class _ProductsPageState extends State<ProductsPage> {
                                 textAlign: TextAlign.center,
                               ),
                               SizedBox(height: 4),
-                              ElevatedButton(
-                                onPressed: () => addToCart(product),
-                                child: Text('ADD TO car'),
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(double.infinity, 36),
-                                  backgroundColor: const Color.fromARGB(255, 255, 153, 0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
+                              inStock
+                                  ? ElevatedButton(
+                                      onPressed: () => addToCart(product),
+                                      child: Text(
+                                        '加入購物車',
+                                        style: TextStyle(color: Colors.black), // 设置文字颜色为黑色
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(double.infinity, 36),
+                                        backgroundColor: const Color.fromARGB(255, 255, 191, 191),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    )
+                                  : ElevatedButton(
+                                      onPressed: null,
+                                      child: Text('賣曬啦'),
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(double.infinity, 36),
+                                        textStyle: TextStyle(fontSize: 12),
+                                        backgroundColor: Colors.grey, // 灰色背景表示无库存
+                                      ),
+                                    ),
                             ],
                           ),
                         ),
@@ -145,4 +160,3 @@ class _ProductsPageState extends State<ProductsPage> {
     );
   }
 }
-
