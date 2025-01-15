@@ -38,8 +38,7 @@ class _DishSelectorPageState extends State<DishSelectorPage> {
       isLoading = true;
     });
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000/random-dishes'));//api從API獲取隨機菜品數據
-
+      final response = await http.get(Uri.parse('http://10.0.2.2:3000/random-dishes'));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         Map<String, dynamic> data = jsonDecode(response.body);
         setState(() {
@@ -107,7 +106,7 @@ class _DishSelectorPageState extends State<DishSelectorPage> {
       backgroundColor: Colors.white,
       body: isLoading
           ? Center(child: CircularProgressIndicator())
-          : PageView(//頁内切換
+          : PageView(
               controller: _pageController,
               children: [
                 Column(
@@ -158,7 +157,16 @@ class _DishSelectorPageState extends State<DishSelectorPage> {
                           );
                         }
                       },
-                      child: Text('查看菜品'),
+                      child: Text(
+                        '查看菜品',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // 白色字体
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 255, 191, 191), // 浅粉色背景
+                      ),
                     ),
                   ],
                 ),
@@ -168,7 +176,16 @@ class _DishSelectorPageState extends State<DishSelectorPage> {
                     ...meatDishes.map((dish) => DishCard(dish: dish)).toList(),
                     ElevatedButton(
                       onPressed: buyAllItems,
-                      child: Text('一鍵加購 (${vegetableDishes.length + meatDishes.length})'),
+                      child: Text(
+                        '一鍵加購 (${vegetableDishes.length + meatDishes.length})',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white, // 白色字体
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 255, 191, 191), // 浅粉色背景
+                      ),
                     ),
                   ],
                 ),
@@ -213,7 +230,7 @@ class DishCard extends StatelessWidget {
     );
   }
 }
-//定義菜品的屬性和構造函數
+
 class Dish {
   final String name;
   final String recipe;

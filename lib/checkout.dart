@@ -233,46 +233,45 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (_userId == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
+Widget build(BuildContext context) {
+  if (_userId == null) {
     return Scaffold(
-   appBar: AppBar(
-  title: const Text(
-    '結算中心',
-    style: TextStyle(
-      color: Colors.white, // 設置文字顏色為白色
-      fontWeight: FontWeight.bold, // 設置文字為粗體
-      fontSize: 20, // 可選：設置文字大小
+      appBar: AppBar(
+        title: const Text(''),
+      ),
+      body: const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text(
+        '結算中心',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+      centerTitle: true,
+      backgroundColor: const Color.fromARGB(255, 255, 80, 80),
+      elevation: 0,
     ),
-  ),
-  centerTitle: true, // 讓文字居中
-  backgroundColor: const Color.fromARGB(255, 255, 80, 80), // 背景設置為紅色
-  elevation: 0, // 可選：移除陰影，讓背景顏色純淨
-),
-      body: 
-      
-      Padding(
+    body: SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
             const Text(
               '訂單摘要:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Expanded(
+            SizedBox(
+              height: 200, // 明確設置高度
               child: ListView.builder(
                 itemCount: widget.items.length,
                 itemBuilder: (context, index) {
@@ -298,7 +297,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-           
             const Text(
               '配送方式:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -357,7 +355,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
             ],
             const SizedBox(height: 16),
-       
             const Text(
               '支付方式:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -378,7 +375,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
               },
             ),
             const SizedBox(height: 16),
-           
             if (_selectedPaymentMethod == '信用卡') ...[
               const Text(
                 '信用卡信息:',
@@ -418,40 +414,41 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
             ],
             const SizedBox(height: 16),
-      
             if (_selectedPaymentMethod != '信用卡')
               _getPaymentQRCode(_selectedPaymentMethod),
             const SizedBox(height: 16),
-       
-        Center(
-  child: SizedBox(
-    width: 500, // 固定按鈕寬度
-    child: ElevatedButton(
-      onPressed: _isSubmitting ? null : submitOrder,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 255, 80, 80), // 按鈕背景顏色
-        padding: const EdgeInsets.symmetric(vertical: 10), // 控制按鈕高度
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0), // 圓角設計
-        ),
-      ),
-      child: _isSubmitting
-          ? const CircularProgressIndicator(color: Colors.white) // 加載中顯示白色進度條
-          : const Text(
-              '提交訂單',
-              style: TextStyle(
-                color: Colors.white, // 白色文字
-                fontWeight: FontWeight.bold, // 粗體字
-                fontSize: 16, // 字體大小
+            Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: ElevatedButton(
+                  onPressed: _isSubmitting ? null : submitOrder,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 50),
+                    backgroundColor: const Color.fromARGB(255, 255, 80, 80),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child: _isSubmitting
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : const Text(
+                          '提交訂單',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                ),
               ),
             ),
-    ),
-  ),
-)
-
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

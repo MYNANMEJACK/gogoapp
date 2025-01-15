@@ -36,10 +36,10 @@ class _SearchPageState extends State<SearchPage> {
           _products = data.map((product) => Product.fromJson(product)).toList();
         });
       } else {
-        print('Failed to fetch search results: ${response.statusCode}');
+        print('無法獲取搜索結果: ${response.statusCode}');
       }
     } catch (error) {
-      print('Error fetching search results: $error');
+      print('獲取搜索結果時出錯: $error');
     } finally {
       setState(() {
         _isLoading = false;
@@ -60,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
-            hintText: '搜索产品',
+            hintText: '搜索產品',
             prefixIcon: Icon(Icons.search),
             border: InputBorder.none,
           ),
@@ -71,7 +71,7 @@ class _SearchPageState extends State<SearchPage> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : _products.isEmpty
-              ? Center(child: Text('没有找到匹配的产品'))
+              ? Center(child: Text('沒有找到匹配的產品'))
               : _buildProductList(),
     );
   }
@@ -94,8 +94,12 @@ class _SearchPageState extends State<SearchPage> {
               },
             ),
             title: Text(product.name),
-            subtitle: Text('价格: \$${product.price.toStringAsFixed(2)}'),
+            subtitle: Text('價格: \$${product.price.toStringAsFixed(2)}'),
             onTap: () {
+              // 关闭键盘
+              FocusScope.of(context).unfocus();
+
+              // 跳转到产品详情页面
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -139,7 +143,7 @@ class Product {
       imageUrl: json['image_url'],
       name: json['name'],
       price: json['price'].toDouble(),
-      description: json['description'] ?? '无描述信息。',
+      description: json['description'] ?? '無描述信息。',
     );
   }
 }
