@@ -88,7 +88,7 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
     }
   }
 
-  // 返回首頁
+ 
   void _navigateToHomePage() {
     Navigator.pushAndRemoveUntil(
       context,
@@ -106,8 +106,16 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('我的訂單'),
+
+           backgroundColor: const Color.fromARGB(255, 255, 80, 80),
+          title: const Text('我的訂單',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
         ),
+         centerTitle: true, 
+           ),
         body: Column(
           children: [
             _buildUserInfoWidget(), // 顯示用戶信息
