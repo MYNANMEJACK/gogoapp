@@ -23,7 +23,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Future<void> fetchUserDetails() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final userName = userProvider.userName;
-    final apiUrl = 'http://10.0.2.2:3000/users/$userName';
+    final apiUrl = 'http://20.249.177.153:8080/users/$userName';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));

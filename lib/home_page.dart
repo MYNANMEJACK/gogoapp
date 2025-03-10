@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> fetchImages() async {
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000/images'));
+      final response = await http.get(Uri.parse('http://20.249.177.153:8080/images'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         setState(() {

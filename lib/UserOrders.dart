@@ -57,7 +57,7 @@ class _UserOrdersPageState extends State<UserOrdersPage> {
   Future<void> _fetchOrders(String userId) async {
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/api/orders/user?userId=$userId'),
+        Uri.parse('http://20.249.177.153:8080/api/orders/user?userId=$userId'),
       );
 
       print('訂單接口響應碼: ${response.statusCode}');

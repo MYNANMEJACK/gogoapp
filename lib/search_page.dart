@@ -27,7 +27,7 @@ class _SearchPageState extends State<SearchPage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/products/search?search=$query'),
+        Uri.parse('http://20.249.177.153:8080/products/search?search=$query'),
       );
 
       if (response.statusCode == 200) {

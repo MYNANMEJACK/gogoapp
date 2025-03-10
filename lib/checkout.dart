@@ -81,7 +81,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:3000/pickup-locations'),
+        Uri.parse('http://20.249.177.153:8080/pickup-locations'),
       );
 
       if (response.statusCode == 200) {
@@ -175,7 +175,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       print('提交的訂單信息: ${jsonEncode(orderData)}');
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/api/orders'), 
+        Uri.parse('http://20.249.177.153:8080/api/orders'), 
         headers: {
           'Content-Type': 'application/json',
         },

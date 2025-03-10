@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _isLoading = true;
     });
 
-    var url = Uri.parse('http://10.0.2.2:3000/register');
+    var url = Uri.parse('http://20.249.177.153:3000/register');
     try {
       var response = await http.post(url, headers: {
         'Content-Type': 'application/json'

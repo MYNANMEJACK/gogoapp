@@ -38,7 +38,7 @@ class _DishSelectorPageState extends State<DishSelectorPage> {
       isLoading = true;
     });
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000/random-dishes'));
+      final response = await http.get(Uri.parse('http://20.249.177.153:8080/random-dishes'));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         Map<String, dynamic> data = jsonDecode(response.body);
         setState(() {

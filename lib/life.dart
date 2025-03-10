@@ -24,7 +24,7 @@ class _ProductsPageState extends State<lifePage> {
 
   Future<void> fetchProducts() async {
     try {
-      final response = await http.get(Uri.parse('http://10.0.2.2:3000/products/type/life'));
+      final response = await http.get(Uri.parse('http://20.249.177.153:8080/products/type/life'));
       if (response.statusCode == 200) {
         setState(() {
           products = json.decode(response.body);
@@ -40,7 +40,6 @@ class _ProductsPageState extends State<lifePage> {
       });
     }
   }
-
   void addToCart(Map<String, dynamic> product) {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     cartProvider.addItem({...product, 'quantity': 1});
@@ -95,73 +94,77 @@ class _ProductsPageState extends State<lifePage> {
                   final product = products[index];
                   final bool inStock = product['stock'] > 0; // 检测库存
 
-                  return Card(
+                return Card(
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+  ),
+  elevation: 3,
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      AspectRatio(
+        aspectRatio: 1,
+        child: GestureDetector(
+          onTap: () => viewProductDetails(product),
+          child: ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+            child: Image.network(
+              product['image_url'],
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Center(child: Icon(Icons.broken_image, size: 50));
+              },
+            ),
+          ),
+        ),
+      ),
+     Expanded(
+  child: Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          product['name'],
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 4),
+        Text(
+          '\$${product['price']}',
+          style: TextStyle(fontSize: 12, color: Colors.green),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 4),
+        Flexible( // 让按钮不会强行占据过多空间，防止溢出
+          child: inStock
+              ? ElevatedButton(
+                  onPressed: () => addToCart(product),
+                  child: Text(
+                    '加入購物車',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 36),
+                    backgroundColor: const Color.fromARGB(255, 255, 191, 191),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    elevation: 3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: GestureDetector(
-                            onTap: () => viewProductDetails(product),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
-                              child: Image.network(
-                                product['image_url'],
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Center(child: Icon(Icons.broken_image, size: 50));
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                product['name'],
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                '\$${product['price']}',
-                                style: TextStyle(fontSize: 12, color: Colors.green),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 4),
-                              inStock
-                                  ? ElevatedButton(
-                                      onPressed: () => addToCart(product),
-                                      child: Text(
-                                        '加入購物車',
-                                        style: TextStyle(color: Colors.black), // 设置文字颜色为黑色
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: Size(double.infinity, 36),
-                                        backgroundColor: const Color.fromARGB(255, 255, 191, 191),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20),
-                                        ),
-                                      ),
-                                    )
-                                  : ElevatedButton(
-                                      onPressed: null,
-                                      child: Text('賣曬啦'),
-                                      style: ElevatedButton.styleFrom(
-                                        minimumSize: Size(double.infinity, 36),
-                                        textStyle: TextStyle(fontSize: 12),
-                                        backgroundColor: Colors.grey, // 灰色背景表示无库存
+                  ),
+                )
+              : ElevatedButton(
+                  onPressed: null,
+                  child: Text('賣曬啦'),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 36),
+                    textStyle: TextStyle(fontSize: 12),
+                    backgroundColor: Colors.grey,), 
                                       ),
                                     ),
                             ],
                           ),
                         ),
+                         ),
                       ],
                     ),
                   );
